@@ -13,7 +13,11 @@
 
     @if (auth()->check())
         Already logged - {{ auth()->user()->name }} -
-        <a href="{{ route('login.destroy') }}">Logout</a>
+        <form action="{{ route('login.destroy') }}" method="POST">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+
     @else
 
 
