@@ -1,50 +1,77 @@
 @extends('layouts/header')
 
+@section('title', 'Login')
+
 @section('content')
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px;">
+        <h2 class="text-center mb-4">Login</h2>
 
-    <a href="{{ route('home.index') }}">Home</a>
+        {{-- Mensagem de sucesso --}}
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
 
-    <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Login</h2>
+        {{-- Verificação de autenticação --}}
+        @if (auth()->check())
+            <div class="text-center">
+                <p>Já logado como: <strong>{{ auth()->user()->name }}</strong></p>
+                <form action="{{ route('login.destroy') }}" method="POST" class="d-inline-block">
+                    @csrf
+                    <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                </form>
+            </div>
+        @else
 
-
-    @if (session()->has('success'))
-        {{ session()->get('success') }}
-    @endif
-
-    @if (auth()->check())
-        Already logged - {{ auth()->user()->name }} -
-        <form action="{{ route('login.destroy') }}" method="POST">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
-
-    @else
-
-
-
-    @error('error')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
-    <form action="{{ route('login.store') }}" method="POST">
-        @csrf
-        <div>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" value="{{ old('email') }}">
-            @error('email')
-                <span class="text-danger">{{ $message }}</span>
+            {{-- Exibe erro geral de login --}}
+            @error('error')
+                <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password">
-            @error('password')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-        <div>
-            <button type="submit">Login</button>
-        </div>
-    </form>
-    @endif
+
+            {{-- Formulário de login --}}
+            <form action="{{ route('login.store') }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        class="form-control @error('email') is-invalid @enderror"
+                        value="{{ old('email') }}"
+                        placeholder="Digite seu email"
+                    >
+                    @error('email')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="form-control @error('password') is-invalid @enderror"
+                        placeholder="Digite sua senha"
+                    >
+                    @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </div>
+            </form>
+        @endif
+    </div>
+</div>
 
 @endsection

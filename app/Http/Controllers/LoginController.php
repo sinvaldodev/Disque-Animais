@@ -27,7 +27,7 @@ class LoginController extends Controller
             return redirect()->route('login.index')->withErrors(['error' => 'email or password invalid']);
         }
 
-        return redirect()->route('home.index')->with(['success' => 'logado com sucesso']);
+        return redirect()->route('home')->with(['success' => 'logado com sucesso']);
     }
 
 
@@ -35,4 +35,5 @@ class LoginController extends Controller
         Auth::logout();
         return redirect()->route('login.index');
     }
+
 }
