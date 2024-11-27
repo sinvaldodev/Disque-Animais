@@ -31,7 +31,16 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/register', 'store')->name('register.store');
 });
 
+
+//criação de animais perdidos
 Route::get('/animals', [AnimalController::class, 'index'])->name('animals.index');
+Route::get('/animals/create', [AnimalController::class, 'create'])->name('animals.create');
+Route::post('/animals', [AnimalController::class, 'store'])->name('animals.store');
+Route::get('/animals/{animal}', [AnimalController::class, 'show'])->name('animals.show');
+Route::get('/animals/{animal}/edit', [AnimalController::class, 'edit'])->name('animals.edit');
+Route::put('/animals/{animal}', [AnimalController::class, 'update'])->name('animals.update');
+Route::get('/animals/{animal}', [AnimalController::class, 'destroy'])->name('animals.destroy');
+
 
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 
