@@ -9,4 +9,16 @@ class Animal extends Model
 {
     /** @use HasFactory<\Database\Factories\AnimalFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'image',
+        'name',
+        'type',
+        'breed',
+        'age',
+        'location',
+        'contact',
+        'status',
+        'description',
+    ];
 }

@@ -31,7 +31,6 @@
                         <li><a href="{{ route('home') }}" class="nav-link px-2 text-secondary">Home</a></li>
                         <li><a href="{{ route('animals.index') }}" class="nav-link px-2 text-white">Animais Perdidos</a>
                         </li>
-                        <li><a href="{{ route('news.index') }}" class="nav-link px-2 text-white">Notícias</a></li>
                     </ul>
 
                     {{-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -60,13 +59,15 @@
     </div>
     </header>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+
     </div>
     <div>
         @yield('content')
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
